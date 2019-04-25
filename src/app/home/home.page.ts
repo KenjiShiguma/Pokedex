@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-
+import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -9,7 +9,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 export class HomePage {
   currentImage: any;
 
-  constructor(private camera: Camera) { }
+  constructor(private camera: Camera,private tts: TextToSpeech) {
+    this.tts.speak('Hello World')
+    .then(() => console.log('Success'))
+    .catch((reason: any) => console.log(reason));}
 
   takePicture() {
     const options: CameraOptions = {
@@ -22,7 +25,7 @@ export class HomePage {
     this.camera.getPicture(options).then((imageData) => {
       this.currentImage = 'data:image/jpeg;base64,' + imageData;
       }, (err) => {
-        
+
       });
   }
 }
