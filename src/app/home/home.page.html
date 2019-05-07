@@ -2,12 +2,12 @@
   <ion-card>
     <ion-card-content>
 
-    <button ion-button icon-right (click)="takePicture()">
-      Take Picture <ion-icon name="camera"></ion-icon>
-    </button>
+      <ion-button icon-right (click)="takePicture()">
+        Take Picture <ion-icon name="camera"></ion-icon>
+      </ion-button>
 
-    <img [src]="currentImage" *ngIf="currentImage">
+      <img [src]="currentImage" *ngIf="currentImage">
 
-  </ion-card-content>
-</ion-card>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
