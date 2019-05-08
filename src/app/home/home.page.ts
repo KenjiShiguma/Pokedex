@@ -24,7 +24,6 @@ export class HomePage {
       // The "data" object contains the list of available voices and the voice synthesis params
       //console.log("Speech is ready, voices are available", data)
 
-      this.readEntry();
     }).catch(e => {
       console.error("An error occured while initializing : ", e)
     })
@@ -63,6 +62,8 @@ export class HomePage {
   getPokemon() {
     this.http.get('http://127.0.0.1:5000/').subscribe((response) => {
       console.log(response);
+      this.pokemon = response;
+      this.readEntry();
     });
   }
   sendPokemon() {
