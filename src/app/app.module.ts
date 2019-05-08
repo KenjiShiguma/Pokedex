@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { NativeAudio } from '@ionic-native/native-audio/ngx';
+import  Speech  from 'speak-tts';
+
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -21,6 +24,7 @@ import { NativeAudio } from '@ionic-native/native-audio/ngx';
     NativeAudio,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     TextToSpeech,
+    Speech,
   ],
   bootstrap: [AppComponent]
 })
