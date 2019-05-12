@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { RequestOptions } from '@angular/http';
 import Speech from 'speak-tts';
 @Component({
   selector: 'app-home',
@@ -59,15 +60,17 @@ export class HomePage {
   //     .then(() => console.log('Success'))
   //     .catch((reason: any) => console.log(reason));
   // }
-  getPokemon() {
-    this.http.get('http://127.0.0.1:5000/').subscribe((response) => {
-      console.log(response);
-      this.pokemon = response;
-      this.readEntry();
-    });
-  }
+  // getPokemon() {
+  //   try{
+  //   this.http.get('http://127.0.0.1:5000/').subscribe((response) => {
+  //     console.log(response);
+  //     this.pokemon = response;
+  //     this.readEntry();
+  //   });
+  // }catch{}
+  // }
   sendPokemon() {
-    var headers = new Headers();
+    var headers = new HttpHeaders();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
     const requestOptions = new RequestOptions({ headers: headers });
