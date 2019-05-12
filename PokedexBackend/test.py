@@ -2,23 +2,23 @@ from flask import Flask
 from flask_cors import CORS
 from flask import jsonify
 from flask import request
+import numpy as np
+import flask
+import cv2
+import json
 app = Flask(__name__)
 CORS(app)
 
 
-@app.route("/")
+@app.route("/", methods=['POST', 'GET'])
 def pokedex():
-    if request.method == 'GET':
-        h = "hello world"
-        return jsonify(h)
-    if request.method == 'POST':
-        data = request.get_json()
-        #get image from frontend
+    #get image from frontend
+    imagefile = json.loads(request.data)
+    #do hog and pca of single image
 
-        #do hog and pcm of single image
+    #predict image
 
-        #predict image
-        h = "pikachu"
-        return jsonify(h)
+    #console.log(h)
+    return jsonify(imagefile)
 if __name__ == "__main__":
     app.run()

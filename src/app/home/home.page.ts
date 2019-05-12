@@ -33,6 +33,7 @@ export class HomePage {
   onChoice() {
     this.currentImage = "/../assets/SamplePokemon/" + this.choice + ".png";
     //this.sendPokemon()
+    this.sendPokemon()
   }
 
   takePicture() {
@@ -70,18 +71,20 @@ export class HomePage {
   // }catch{}
   // }
   sendPokemon() {
-    var headers = new HttpHeaders();
+    var headers = new Headers();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
     const requestOptions = new RequestOptions({ headers: headers });
 
     let postData = {
-      "pokemon": this.choice
+      "data" : this.currentImage
     }
 
     this.http.post('http://127.0.0.1:5000/', postData, requestOptions)
       .subscribe(data => {
-        console.log(data['_body']);
+        console.log(data);
+        this.pokemon = data;
+        this.readEntry();
       }, error => {
         console.log(error);
       });
