@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { TextToSpeech } from '@ionic-native/text-to-speech/ngx';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { RequestOptions } from '@angular/http';
+import { RequestOptions, Headers } from '@angular/http';
 import Speech from 'speak-tts';
 @Component({
   selector: 'app-home',
@@ -11,8 +11,9 @@ import Speech from 'speak-tts';
 })
 export class HomePage {
   currentImage: string;
-  pokemon = "Pikachu" //get from flask
-  choice: string; //send to flask
+  currentFileName: string; //send to flask
+  pokemon: string;
+  choice: string;
   constructor(private camera: Camera,
     private tts: TextToSpeech,
     private http: HttpClient,
@@ -32,7 +33,7 @@ export class HomePage {
   }
   onChoice() {
     this.currentImage = "/../assets/SamplePokemon/" + this.choice + ".png";
-    //this.sendPokemon()
+    this.currentFileName = this.choice + '.png';
     this.sendPokemon()
   }
 
@@ -61,23 +62,14 @@ export class HomePage {
   //     .then(() => console.log('Success'))
   //     .catch((reason: any) => console.log(reason));
   // }
-  // getPokemon() {
-  //   try{
-  //   this.http.get('http://127.0.0.1:5000/').subscribe((response) => {
-  //     console.log(response);
-  //     this.pokemon = response;
-  //     this.readEntry();
-  //   });
-  // }catch{}
-  // }
   sendPokemon() {
-    var headers = new Headers();
+    var headers = new HttpHeaders();
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/json');
-    const requestOptions = new RequestOptions({ headers: headers });
+    const requestOptions = new RequestOptions({ headers: HttpHeaders });
 
     let postData = {
-      "data" : this.currentImage
+      "data" : this.currentFileName
     }
 
     this.http.post('http://127.0.0.1:5000/', postData, requestOptions)
@@ -172,19 +164,19 @@ export class HomePage {
     ]
     let random = 0;
     switch (this.pokemon) {
-      case "Pikachu":
+      case "pikachu":
         random = Math.floor(Math.random() * pikachuEntries.length)
         return "Pikachu: the Mouse Pokémon. " + pikachuEntries[random]
         break;
-      case "Bulbasaur":
+      case "bulbasaur":
         random = Math.floor(Math.random() * bulbasaurEntries.length)
         return "Bulbasaur: the Seed Pokémon. " + bulbasaurEntries[random]
         break;
-      case "Charmander":
+      case "charmander":
         random = Math.floor(Math.random() * charmanderEntries.length)
         return "Charmander: the Lizard Pokemon. " + charmanderEntries[random]
         break;
-      case "Squirtle":
+      case "squirtle":
         random = Math.floor(Math.random() * squirtleEntries.length)
         return "Squirtle: the Tiny Turtle Pokémon. " + squirtleEntries[random]
         break;
