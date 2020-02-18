@@ -1,13 +1,36 @@
 <ion-content>
-  <ion-card>
-    <ion-card-content>
 
-    <button ion-button icon-right (click)="takePicture()">
-      Take Picture <ion-icon name="camera"></ion-icon>
-    </button>
+  <ion-list>
+    <ion-item>
+      <ion-label>Pokemon</ion-label>
+      <ion-select [(ngModel)]="choice" (ionChange)="onChoice()" placeholder="Choose a Pokemon!">
+        <ion-select-option value="Pikachu">Pikachu</ion-select-option>
+        <ion-select-option value="Squirtle">Squirtle</ion-select-option>
+        <ion-select-option value="Bulbasaur">Bulbasaur</ion-select-option>
+        <ion-select-option value="Charmander">Charmander</ion-select-option>
+        <ion-select-option value="Ditto">Ditto</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-card *ngIf="currentImage">
+      <ion-card-content >
 
-    <img [src]="currentImage" *ngIf="currentImage">
+        <!-- <ion-button icon-right (click)="takePicture()">
+        Take Picture <ion-icon name="camera"></ion-icon>
+      </ion-button> -->
 
-  </ion-card-content>
-</ion-card>
+        <img id="img" [src]="currentImage">
+        <div class="centered">
+          <ion-button block (click)="playCry()">
+            play cry
+          </ion-button>
+          <ion-button block (click)="readEntry()">
+            play entry
+          </ion-button>
+        </div>
+        <!-- <ion-button icon-right (click)="playtts()">
+        play voice
+      </ion-button> -->
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
 </ion-content>
